@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=/home/avinash/src/cs141/labs/lab1/lab1_project/impact.xsl
+OUTFILE=/home/avinash/src/cs141/labs/lab1/lab1_project/impact.xsl
+FAMILY=Single
+PART=Single
+WORKINGDIR=/home/avinash/src/cs141/labs/lab1/lab1_project
+LICENSE=iMPACT
+USER_INFO=iMPACT
