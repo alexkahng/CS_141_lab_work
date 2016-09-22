@@ -11,7 +11,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 `include "alu_defines.v"
 
-module alu(X,Y,Z,op_code, equal, overflow, zero);
+module alu(X, Y, Z, op_code, equal, overflow, zero);
 
 	//port definitions - customize for different bit widths
 	input  wire [31:0] X;
@@ -26,6 +26,15 @@ module alu(X,Y,Z,op_code, equal, overflow, zero);
 	//functional blocks
 	
    //YOUR CODE HERE - remember to use a separate file for each module you create
+	
+	opcode[3] ? (opcode[2] ? (opcode[1] ? (opcode[0] ? 0 : 0)
+	                                    : (opcode[0] ? 0 : 0))
+								  : (opcode[1] ? (opcode[0] ? 0 : 0/*SRA*/)
+	                                    : (opcode[0] ? 0/*SLL*/ : 0/*SRL*/)))
+				 : (opcode[2] ? (opcode[1] ? (opcode[0] ? 0/*SLT*/ : 0/*SUB*/)
+	                                    : (opcode[0] ? adder #(.X(X), .Y(Y), .Cin(0), .Cout(overflow), .Z(Z), .equal(equal), .zero(zero)) : 0))
+								  : (opcode[1] ? (opcode[0] ? bitwise_nor #(.X(X), .Y(Y), .Z(Z), .equal(equal), .zero(zero)) : bitwise_xor #(.X(X), .Y(Y), .Z(Z), .equal(equal), .zero(zero)))
+	                                    : (opcode[0] ? bitwise_or #(.X(X), .Y(Y), .Z(Z), .equal(equal), .zero(zero)) : bitwise_and #(.X(X), .Y(Y), .Z(Z), .equal(equal), .zero(zero)))));
 
 
 endmodule

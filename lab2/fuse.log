@@ -1,0 +1,9 @@
+Running: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt\unwrapped\fuse.exe -intstyle ise -incremental -lib unisims_ver -lib unimacro_ver -lib xilinxcorelib_ver -lib secureip -o Z:/shared_with_vm_cs141/lab2/test_alu_isim_beh.exe -prj Z:/shared_with_vm_cs141/lab2/test_alu_beh.prj work.test_alu work.glbl 
+ISim P.20131013 (signature 0x8ef4fb42)
+Number of CPUs detected in this system: 1
+Turning on mult-threading, number of parallel sub-compilation jobs: 0 
+Determining compilation order of HDL files
+Analyzing Verilog file "Z:/shared_with_vm_cs141/lab2/alu.v" into library work
+ERROR:HDLCompiler:806 - "Z:/shared_with_vm_cs141/lab2/alu.v" Line 14: Syntax error near "module".
+WARNING:HDLCompiler:1591 - "alu_defines.v" Line 1: Root scope declaration is not allowed in verilog 95/2K mode
+Verilog file Z:/shared_with_vm_cs141/lab2/alu.v ignored due to errors
