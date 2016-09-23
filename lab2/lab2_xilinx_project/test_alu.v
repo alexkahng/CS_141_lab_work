@@ -14,12 +14,16 @@ module test_alu;
 	reg [31:0] X;
 	reg [31:0] Y;
 	reg [3:0] op_code;
+	reg Cin;
+	reg Cout;
+	reg error;
 
 	// Outputs
 	wire [31:0] Z;
 	wire equal;
 	wire overflow;
 	wire zero;
+	
 
 	// Instantiate the Unit Under Test (UUT)
 	alu uut (
@@ -33,7 +37,8 @@ module test_alu;
 	);
 
 	// HINT: 'integer' variables might be useful
-	integer i;
+	integer i, j;
+	
 	initial begin
 		// Initialize Inputs
 		X = 0;
@@ -42,41 +47,56 @@ module test_alu;
 		
 		#100;
 		
-		// YOUR CODE HERE
-		// loop through all important test vectors
-		// this triggers the always block
-		
 		// Testing OR / NOR / XOR / AND
-		for (i = 0; i < 4; i = i + 1) begin
+		for (i = 0; i <= 3; i = i + 1) begin
 			op_code = i;
-			X = 32'h00000000;
-			Y = 32'h00000000;
+			X = 32'b00000000000000000000000000000000;
+			Y = 32'b00000000000000000000000000000000;
 			#10;
-			X = 32'hFFFFFFFF;
+			X = 32'b11111111111111111111111111111111;
 			#10;
-			Y = 32'hFFFFFFFF;
+			Y = 32'b11111111111111111111111111111111;
 			#10;
-			X = 32'h00000000;
+			X = 32'b00000000000000000000000000000000;
 			#10;
+//			// Random input
+//			for (j = 0; j <= 63; j = j + 1) begin
+//				X = $random%(2**31);
+//				Y = $random%(2**31);
+//				#10;
+//			end
 		end
 		
 		// Testing ADD
+		op_code = 4'b0101;
 		X = 1;
 		Y = 1;
 		Cin = 0;
 		Cout = 0;
 
-		// Wait 100 ns for global reset to finish
 		#100;
         
-		// Add stimulus here
+		// Testing all connections in ripple-carry adder
 		for (i = 0; i <= 31; i = i + 1) begin
 			X = X << 1;
 			Y = Y << 1;
 			#10;
 		end
 		
+//		// Random input
+//		for (i = 0; i <= 1023; i = i + 1) begin
+//			X = $random%(2**31);
+//			Y = $random%(2**31);
+//			#10;
+//		end
 		
+		// Testing all other op_codes
+		X = $random%(2**31);
+		Y = $random%(2**31);
+		for (i = 0; i <= 15; i = i + 1) begin
+			op_code = i[3:0];
+			#10;
+		end
 		
 		$finish;
 	

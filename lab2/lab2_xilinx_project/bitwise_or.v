@@ -9,19 +9,16 @@
 //
 //
 //////////////////////////////////////////////////////////////////////////////////
-module bitwise_or(X, Y, Z, equal, zero);
+module bitwise_or(X, Y, Z);
 
 	//parameter definitions
 
 	//port definitions - customize for different bit widths
 	input wire [31:0] X, Y;
 	output wire [31:0] Z;
-	output wire equal, zero;
 	
 	//module body
 	assign Z = X | Y;
-	assign equal = ~(|(X ^ Y));
-	assign zero = ~(|Z);
 
 endmodule
 `default_nettype wire //some Xilinx IP requires that the default_nettype be set to wire

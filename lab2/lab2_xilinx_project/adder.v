@@ -9,7 +9,7 @@
 //
 //
 //////////////////////////////////////////////////////////////////////////////////
-module adder(X, Y, Cin, Cout, Z, equal, zero);
+module adder(X, Y, Cin, Cout, Z/*, equal, zero*/);
 
 	//parameter definitions
 	
@@ -18,7 +18,7 @@ module adder(X, Y, Cin, Cout, Z, equal, zero);
 	input wire Cin;
 	wire [31:0] Carrybits;
 	output wire [31:0] Z;
-	output wire Cout, equal, zero;
+	output wire Cout/*, equal, zero*/;
 	
 	//module body
 	bit_adder BA_0 (.X(X[0]), .Y(Y[0]), .Cin(Cin), .Cout(Carrybits[0]), .Z(Z[0]));
@@ -55,8 +55,8 @@ module adder(X, Y, Cin, Cout, Z, equal, zero);
 	bit_adder BA_31 (.X(X[31]), .Y(Y[31]), .Cin(Carrybits[30]), .Cout(Carrybits[31]), .Z(Z[31]));
 	
 	assign Cout = Carrybits[31] ^ Carrybits[30];
-	assign equal = ~(|(X ^ Y));
-	assign zero = ~(|Z);
+//	assign equal = ~(|(X ^ Y));
+//	assign zero = ~(|Z);
 	
 endmodule
 `default_nettype wire //some Xilinx IP requires that the default_nettype be set to wire

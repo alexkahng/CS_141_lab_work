@@ -35,7 +35,7 @@ module bit_adder_test;
 
 	// Instantiate the Unit Under Test (UUT)
 	bit_adder uut (
-		o.X(X), 
+		.X(X), 
 		.Y(Y), 
 		.Cin(Cin), 
 		.Cout(Cout), 
