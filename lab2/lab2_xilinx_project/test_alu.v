@@ -90,6 +90,30 @@ module test_alu;
 //			#10;
 //		end
 		
+		// Testing SUB
+		op_code = 4'b0110;
+		
+		// Overflow cases
+		X = 32'b10000000000000000000000000000000;
+		Y = 32'b01111111111111111111111111111111;
+		Cin = 0;
+		Cout = 0;
+
+		#100;
+		
+		Y = 32'b10000000000000000000000000000000;
+		X = 32'b01111111111111111111111111111111;
+
+		#100;
+		
+		// Random input
+		for (i = 0; i <= 10; i = i + 1) begin
+			X = $random%(2**31);
+			Y = $random%(2**31);
+			#10;
+		end
+		
+		
 		// Testing all other op_codes
 		X = $random%(2**31);
 		Y = $random%(2**31);
@@ -158,6 +182,18 @@ module test_alu;
 				end
 			end
 			`ALU_OP_SUB: begin
+				if (Z !== X - Y) begin
+					$display("ERROR: SUB:  op_code = %b, X = %h, Y = %h, Z = %h", op_code, X, Y, Z);
+					error = error + 1;
+				end
+				if ((X[31] == 1 && Y[31] == 0 && Z[31] == 0 || X[31] == 0 && Y[31] == 1 && Z[31] == 1) && !overflow) begin
+					$display("ERROR: SUB: overflow error: op_code = %b, X = %h, Y = %h, Z = %h", op_code, X, Y, Z);
+					error = error + 1;
+				end
+				if (!(X[31] == 1 && Y[31] == 0 && Z[31] == 0 || X[31] == 0 && Y[31] == 1 && Z[31] == 1) && overflow) begin
+					$display("ERROR: SUB: overflow error: op_code = %b, X = %h, Y = %h, Z = %h", op_code, X, Y, Z);
+					error = error + 1;
+				end			
 			end
 			`ALU_OP_SLT: begin
 			end

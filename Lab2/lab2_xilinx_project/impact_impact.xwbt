@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=Z:\shared_with_vm_cs141\Lab2\lab2_xilinx_project\impact.xsl
+OUTFILE=Z:\shared_with_vm_cs141\Lab2\lab2_xilinx_project\impact.xsl
+FAMILY=Single
+PART=Single
+WORKINGDIR=Z:\shared_with_vm_cs141\Lab2\lab2_xilinx_project
+LICENSE=iMPACT
+USER_INFO=iMPACT
