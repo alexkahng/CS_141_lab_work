@@ -30,15 +30,18 @@ module mux16to1(X, Y, Z, op_code, overflow);
 	bitwise_and AND (.X(X), .Y(Y), .Z(and_out));
 	adder ADD (.X(X), .Y(Y), .Cin(1'b0), .Cout(overflow_add), .Z(add_out));
 	subtractor SUB (.X(X), .Y(Y), .Cin(1'b0), .Cout(overflow_sub), .Z(sub_out));
-	
+	slt SLT (.X(X), .Y(Y), .Z(slt_out));
+	srl SRL (.X(X), .Y(Y), .Z(srl_out));
+	sll SLL (.X(X), .Y(Y), .Z(sll_out));
+	sra SRA (.X(X), .Y(Y), .Z(sra_out));
 	
 	
 	//module body
 	assign Z = op_code[3] ? (op_code[2] ? (op_code[1] ? (op_code[0] ? 0 : 0)
 	                                                  : (op_code[0] ? 0 : 0))
-								               : (op_code[1] ? (op_code[0] ? 0 : 0/*SRA*/)
-	                                                  : (op_code[0] ? 0/*SLL*/ : 0/*SRL*/)))
-				             : (op_code[2] ? (op_code[1] ? (op_code[0] ? 0/*SLT*/ : sub_out)
+								               : (op_code[1] ? (op_code[0] ? 0 : sra_out)
+	                                                  : (op_code[0] ? sll_out : srl_out)))
+				             : (op_code[2] ? (op_code[1] ? (op_code[0] ? slt_out : sub_out)
 	                                                  : (op_code[0] ? add_out : 0))
 								               : (op_code[1] ? (op_code[0] ? nor_out : xor_out)
 	                                                  : (op_code[0] ? or_out : and_out)));

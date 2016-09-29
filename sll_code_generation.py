@@ -6,11 +6,12 @@ f = open('sll_code.txt','w')
 
 ## Code generation for inputs
 for i in xrange(32):
-	f.write("\tassign input%d = {" % i)
-	for j in reversed(xrange(32-i)):
-		f.write("X[%d]," % (j))
+	f.write("\tassign input%d = {" % (31-i))
 	for j in xrange(i):
 		f.write("1'b0,")
+	for j in xrange(32-i):
+		f.write("X[%d]," % (j))
+	
 	f.write("};\n")
 
 f.close()

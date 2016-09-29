@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "Z:/CS_141_lab_work/lab2/lab2_xilinx_project/test_alu_isim_beh.exe" -prj "Z:/CS_141_lab_work/lab2/lab2_xilinx_project/test_alu_beh.prj" "work.test_alu" "work.glbl" 
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "Z:/shared_with_vm_cs141/Lab2/lab2_xilinx_project/test_alu_isim_beh.exe" -prj "Z:/shared_with_vm_cs141/Lab2/lab2_xilinx_project/test_alu_beh.prj" "work.test_alu" "work.glbl" 

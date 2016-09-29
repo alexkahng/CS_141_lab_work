@@ -16,7 +16,7 @@ module mux32to1(X, Y, Z);
 	//port definitions - customize for different bit widths
 	input  wire [31:0] X;
 	input  wire [4:0]  Y;
-	output wire [31:0] Z;
+	output wire Z;
 
 	//module body
 	assign Z = Y[4] ? (Y[3] ? (Y[2] ? (Y[1] ? (Y[0] ? X[31] : X[30])

@@ -37,7 +37,7 @@ module test_alu;
 	);
 
 	// HINT: 'integer' variables might be useful
-	integer i, j;
+	integer i, j, k;
 	
 	initial begin
 		// Initialize Inputs
@@ -106,12 +106,40 @@ module test_alu;
 
 		#100;
 		
-		// Random input
-		for (i = 0; i <= 10; i = i + 1) begin
-			X = $random%(2**31);
-			Y = $random%(2**31);
-			#10;
-		end
+//		// Random input
+//		for (i = 0; i <= 10; i = i + 1) begin
+//			X = $random%(2**31);
+//			Y = $random%(2**31);
+//			#10;
+//		end
+
+		// Testing SLT
+		op_code = 4'b0111;
+		X = 32'b00000000000000000000000000000000;
+		Y = 32'b00000000000000000000000000000001;
+		#10;
+		Y = 32'b00000000000000000000000000000000;
+		X = 32'b00000000000000000000000000000001;
+		#10;
+		X = 32'b01111111111111111111111111111111;
+		Y = 32'b10000000000000000000000000000000;
+		#10;
+		Y = 32'b01111111111111111111111111111111;
+		X = 32'b10000000000000000000000000000000;
+		#10;
+		
+		
+		// Testing SRL / SLL / SRA
+		for (i = 8; i <= 10; i = i + 1) begin
+			op_code = i;
+			for (j = 0; j <= 1; j = j + 1) begin
+				X = $random%(2**31);
+				for (k = -1; k <= 33; k = k + 1) begin
+					Y = k;
+					#10;
+				end
+			end
+		end		
 		
 		
 		// Testing all other op_codes
@@ -196,12 +224,44 @@ module test_alu;
 				end			
 			end
 			`ALU_OP_SLT: begin
+				if ($signed(X) < $signed(Y) && Z !== 32'd1) begin
+					$display("ERROR: SLT: X = %h, Y = %h. Expected 1 but got 0", X, Y);
+					error = error + 1;
+				end
+				if ($signed(X) >= $signed(Y) && Z !== 32'd0) begin
+					$display("ERROR: SLT: X = %h, Y = %h. Expected 0 but got 1", X, Y);
+					error = error + 1;
+				end
 			end
 			`ALU_OP_SRL: begin
+				if ((Y >= 32 || Y < 0) && Z !== 32'd0) begin
+					$display("ERROR: SRL: Expected 0 but got something else");
+					error = error + 1;
+				end
+				if ((0 <= Y && Y <= 31) && Z !== X >> Y) begin
+					$display("ERROR: SRL: op_code = %b, X = %h, Y = %h, Z = %h", op_code, X, Y, Z);
+					error = error + 1;
+				end
 			end
 			`ALU_OP_SLL: begin
+				if ((Y >= 32 || Y < 0) && Z !== 32'd0) begin
+					$display("ERROR: SLL: Expected 0 but got something else");
+					error = error + 1;
+				end
+				if ((0 <= Y && Y <= 31) && Z !== X << Y) begin
+					$display("ERROR: SLL: op_code = %b, X = %h, Y = %h, Z = %h", op_code, X, Y, Z);
+					error = error + 1;
+				end
 			end
 			`ALU_OP_SRA: begin
+			if ((Y >= 32 || Y < 0) && Z !== 32'd0) begin
+					$display("ERROR: SRA: Expected 0 but got something else");
+					error = error + 1;
+				end
+				if ((0 <= Y && Y <= 31) && Z !== X >>> Y) begin
+					$display("ERROR: SRA: op_code = %b, X = %h, Y = %h, Z = %h", op_code, X, Y, Z);
+					error = error + 1;
+				end
 			end
 			default : begin
 				//executes at default
