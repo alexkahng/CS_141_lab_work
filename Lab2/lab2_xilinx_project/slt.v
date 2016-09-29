@@ -9,11 +9,20 @@
 //
 //
 //////////////////////////////////////////////////////////////////////////////////
-module slt();
+module slt(X, Y, Z);
 
 	//parameter definitions
 
 	//port definitions - customize for different bit widths
+	input  wire [31:0] X, Y;
+	output wire [31:0] Z;
+	wire overflow;
+	wire [31:0] result;
+	
+	//module body
+	subtractor SUB (.X(X), .Y(Y), .Cin(1'b0), .Cout(overflow), .Z(result));
+	
+	assign Z = (result[31] ^ overflow) ? 32'd1 : 32'd0;
 
 
 endmodule
