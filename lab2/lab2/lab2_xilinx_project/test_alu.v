@@ -201,10 +201,12 @@ module test_alu;
 					error = error + 1;
 				end
 				if ((X[31] == 1 && Y[31] == 1 && Z[31] == 0 || X[31] == 0 && Y[31] == 0 && Z[31] == 1) && !overflow) begin
+					$display("Case 1");
 					$display("ERROR: ADD: overflow error: op_code = %b, X = %h, Y = %h, Z = %h", op_code, X, Y, Z);
 					error = error + 1;
 				end
 				if (!(X[31] == 1 && Y[31] == 1 && Z[31] == 0 || X[31] == 0 && Y[31] == 0 && Z[31] == 1) && overflow) begin
+					$display("Case 2");
 					$display("ERROR: ADD: overflow error: op_code = %b, X = %h, Y = %h, Z = %h", op_code, X, Y, Z);
 					error = error + 1;
 				end
