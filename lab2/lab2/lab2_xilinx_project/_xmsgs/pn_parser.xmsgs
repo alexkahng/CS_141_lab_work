@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated   -->
+<!--     by the Xilinx ISE software.  Any direct editing or        -->
+<!--     changes made to this file may result in unpredictable     -->
+<!--     behavior or data corruption.  It is strongly advised that -->
+<!--     users do not edit the contents of this file.              -->
+<!--                                                               -->
+<!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
+
+<messages>
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/adder.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/alu.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1065" >&quot;<arg fmt="%s" index="1">Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/alu.v</arg>&quot; Line <arg fmt="%d" index="2">12</arg>. <arg fmt="%s" index="3">Include file found: &apos;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/alu_defines.v&apos; in file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/alu.v&quot; line 12
+</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/bit_adder.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/bitwise_and.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/bitwise_nor.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/bitwise_or.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/bitwise_xor.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/cla32.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/cla4.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/mux16to1.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/mux16to1_switch.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/mux32to1.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/mux4to1.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/sll.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/slt.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/sra.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/srl.v&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/CS_141_lab_work/lab2/lab2/lab2_xilinx_project/subtractor.v&quot; into library work</arg>
+</msg>
+
+</messages>
+
