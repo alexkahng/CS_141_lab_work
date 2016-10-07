@@ -23,7 +23,7 @@ module register(clk, ena, rst, in, out);
 	//module body
 	always @(posedge clk) begin
 		if (rst) begin
-			out <= 2'b11;
+			out <= -1;
 		end
 		else if (ena) begin
 			out <= in;

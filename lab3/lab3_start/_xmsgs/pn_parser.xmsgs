@@ -8,8 +8,5 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1845" ><arg fmt="%s" index="1">Analyzing Verilog file &quot;Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/ipcore_dir/clock_generator.v&quot; into library work</arg>
-</msg>
-
 </messages>
 
