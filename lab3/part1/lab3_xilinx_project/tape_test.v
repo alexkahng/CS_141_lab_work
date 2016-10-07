@@ -59,6 +59,7 @@ module tape_test;
 		#10;
 		
 		// Add stimulus here
+		// Write, move back, and read
 		for (i = 0; i < 8; i = i + 1) begin
 			mode <= 1;
 			if (i % 2 === 0) begin
@@ -72,6 +73,20 @@ module tape_test;
 			#40;
 			mode <= 0;
 			move <= 1;
+			#40;
+		end
+		
+		
+		// Reset all bits in tape
+		mode <= 1;
+		for (i = 0; i < 8; i = i + 1) begin
+			reset <= 1;
+			#40;
+		end
+		
+		// Read all bits in tape
+		mode <= 0;
+		for (i = 0; i < 8; i = i + 1) begin
 			#40;
 		end
 		

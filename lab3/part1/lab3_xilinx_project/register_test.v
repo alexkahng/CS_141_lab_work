@@ -73,7 +73,7 @@ module register_test;
 		in <= 2'b11;
 		#40;
 		
-		// Check that reset sets output to 2'b00
+		// Check that reset sets output to -1
 		rst = 1;
 		#40;
 		rst = 0;
