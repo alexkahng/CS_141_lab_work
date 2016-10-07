@@ -135,6 +135,7 @@ module tape(clk, mode, move, reset, in, out);
 		end
 		// Read mode
 		else begin
+			ena <= 0;
 			case (head)
 				3'b000: out <= out_exp[1:0];
 				3'b001: out <= out_exp[3:2];
