@@ -17,12 +17,13 @@ module tape(clk, mode, move, reset, in, out);
 	//port definitions -	customize for different bit widths
 	// mode = 0 for read; = 1 for write
 	// move = 0 for right (toward LSB); = 1 for left (toward MSB)
-	input wire clk, mode, move;
+	input wire clk, mode, move, reset;
 	// in and out are 00 for 0, 01 for 1, 10 / 11 for blank (MSB = 1)
 	input wire [1:0] in;
-	output wire [1:0] out;
+	output reg [1:0] out;
 	reg [7:0] ena, rst;
-	reg [15:0] in_exp, out_exp;
+	reg [15:0] in_exp;
+	wire [15:0] out_exp;
 	reg [2:0] head;
 	
 	register #(.SIZE(SIZE)) reg0 (.clk(clk), .ena(ena[0]), .rst(rst[0]), .in(in_exp[1:0]), .out(out_exp[1:0]));
@@ -34,7 +35,9 @@ module tape(clk, mode, move, reset, in, out);
 	register #(.SIZE(SIZE)) reg6 (.clk(clk), .ena(ena[6]), .rst(rst[6]), .in(in_exp[13:12]), .out(out_exp[13:12]));
 	register #(.SIZE(SIZE)) reg7 (.clk(clk), .ena(ena[7]), .rst(rst[7]), .in(in_exp[15:14]), .out(out_exp[15:14]));
 
-	assign head = 3'b000;
+	initial begin
+		head <= 3'b000;
+	end
 
 	always @(posedge clk) begin
 		// Write mode
@@ -133,14 +136,14 @@ module tape(clk, mode, move, reset, in, out);
 		// Read mode
 		else begin
 			case (head)
-				3'b000: out = out_exp[1:0];
-				3'b001: out = out_exp[3:2];
-				3'b010: out = out_exp[5:4];
-				3'b011: out = out_exp[7:6];
-				3'b100: out = out_exp[9:8];
-				3'b101: out = out_exp[11:10];
-				3'b110: out = out_exp[13:12];
-				3'b111: out = out_exp[15:14];
+				3'b000: out <= out_exp[1:0];
+				3'b001: out <= out_exp[3:2];
+				3'b010: out <= out_exp[5:4];
+				3'b011: out <= out_exp[7:6];
+				3'b100: out <= out_exp[9:8];
+				3'b101: out <= out_exp[11:10];
+				3'b110: out <= out_exp[13:12];
+				3'b111: out <= out_exp[15:14];
 			endcase
 		end
 		
