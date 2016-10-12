@@ -27,7 +27,7 @@ module tape_test;
 	// Inputs
 	reg clk;
 	reg mode;
-	reg move;
+	reg [2:0] head;
 	reg reset;
 	reg [1:0] in;
 
@@ -38,7 +38,7 @@ module tape_test;
 	tape uut (
 		.clk(clk), 
 		.mode(mode), 
-		.move(move), 
+		.head(head), 
 		.reset(reset), 
 		.in(in), 
 		.out(out)
@@ -50,7 +50,6 @@ module tape_test;
 		// Initialize Inputs
 		clk = 0;
 		mode = 1;
-		move = 1;
 		reset = 0;
 		in = 0;
 
@@ -61,6 +60,7 @@ module tape_test;
 		// Add stimulus here
 		// Write, move back, and read
 		for (i = 0; i < 8; i = i + 1) begin
+			head <= i;
 			mode <= 1;
 			if (i % 2 === 0) begin
 				in <= 2'b01;
@@ -69,10 +69,7 @@ module tape_test;
 				in <= 2'b00;
 			end
 			#40;
-			move <= 0;
-			#40;
 			mode <= 0;
-			move <= 1;
 			#40;
 		end
 		
@@ -80,6 +77,7 @@ module tape_test;
 		// Reset all bits in tape
 		mode <= 1;
 		for (i = 0; i < 8; i = i + 1) begin
+			head <= i;
 			reset <= 1;
 			#40;
 		end
@@ -87,16 +85,17 @@ module tape_test;
 		// Read all bits in tape
 		mode <= 0;
 		for (i = 0; i < 8; i = i + 1) begin
+			head <= i;
 			#40;
 		end
 		
-		for (i = 0; i <= 150; i = i + 1) begin
-			mode <= $random;
-			move <= $random;
-			reset <= $random;
-			in <= $random;
-			#100;
-		end
+//		for (i = 0; i <= 150; i = i + 1) begin
+//			mode <= $random;
+//			head <= $random;
+//			reset <= $random;
+//			in <= $random;
+//			#100;
+//		end
 	end
 	
 	

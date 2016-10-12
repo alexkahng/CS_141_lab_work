@@ -19,6 +19,8 @@ module main(switch, led, rstb_button, unbuf_clk, button_center);
 	
 	wire cclk, rstb, rst, button_center_db;
 	
+	reg [1:0] ctr;
+	
 	clock_generator CLOCK_GEN (.clk_100M_raw(unbuf_clk),.clk_100M(cclk));
 	
 	// debounce any changes lasting less than 100ms
@@ -30,7 +32,7 @@ module main(switch, led, rstb_button, unbuf_clk, button_center);
 	assign rst = ~rstb;
 	assign led = switch; // you'll want to change this!
 	
-	led_switch_driver LS_DRIVER (.button_center_db(button_center_db),.rst(rst));
+	led_switch_driver LS_DRIVER (.button_center_db(button_center_db), .rst(rst), .ctr(ctr));
 	
 endmodule
 `default_nettype wire //some Xilinx IP requires that the default_nettype be set to wire

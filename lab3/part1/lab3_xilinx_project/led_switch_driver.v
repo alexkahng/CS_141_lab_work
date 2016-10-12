@@ -3,11 +3,11 @@
 
 // You will need to add to this module to interface it with your FSM
 
-module led_switch_driver(button_center_db, rst);
+module led_switch_driver(button_center_db, rst, ctr);
 
 	input wire button_center_db, rst;
 	
-	reg [1:0] ctr;
+	output reg [1:0] ctr;
 	
 	// creates a 4 bit counter that counts everytime the center button is pressed
 	// feel free to modify this as you see fit - you likely will need to
