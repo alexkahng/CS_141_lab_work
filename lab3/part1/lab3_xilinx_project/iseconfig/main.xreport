@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2016-10-11T21:36:54</DateModified>
+  <DateModified>2016-10-14T01:37:15</DateModified>
   <ModuleName>main</ModuleName>
-  <SummaryTimeStamp>2016-10-07T03:39:30</SummaryTimeStamp>
+  <SummaryTimeStamp>2016-10-14T01:35:36</SummaryTimeStamp>
   <SavedFilePath>Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/iseconfig/main.xreport</SavedFilePath>
   <ImplementationReportsDirectory>Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project\</ImplementationReportsDirectory>
   <DateInitialized>2016-09-26T02:31:26</DateInitialized>

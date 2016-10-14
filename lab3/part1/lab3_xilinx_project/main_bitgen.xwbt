@@ -1,8 +1,8 @@
 INTSTYLE=ise
-INFILE=C:\Users\joncr_000\tm-verilog\lab3\main.ncd
-OUTFILE=C:\Users\joncr_000\tm-verilog\lab3\main.bit
+INFILE=Z:\shared_with_vm_cs141\lab3\part1\lab3_xilinx_project\main.ncd
+OUTFILE=Z:\shared_with_vm_cs141\lab3\part1\lab3_xilinx_project\main.bit
 FAMILY=Spartan6
 PART=xc6slx45-3csg324
-WORKINGDIR=C:\Users\joncr_000\tm-verilog\lab3
+WORKINGDIR=Z:\shared_with_vm_cs141\lab3\part1\lab3_xilinx_project
 LICENSE=WebPack
-USER_INFO=211087253_0_0_159
+USER_INFO=207362390_1777509885_0_951

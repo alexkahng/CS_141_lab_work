@@ -22,7 +22,6 @@ module tape(clk, mode, head, reset, in, out);
 	input wire [1:0] in;
 	input wire [2:0] head;
 	output reg [1:0] out;
-	reg [15:0] in_exp;
 	wire [15:0] out_exp;
 	
 	register #(.SIZE(SIZE)) reg0 (.clk(clk), .ena((mode === 1 && head === 3'b000)), .rst(reset), .in(in), .out(out_exp[1:0]));
