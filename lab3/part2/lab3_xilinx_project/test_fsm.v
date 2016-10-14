@@ -80,12 +80,13 @@ module test_fsm;
 		#10;
 		center <= 0;
 		#390;
-		switch <= 8'b00101010;
+		switch <= 8'b00001111;
 		ctr <= 2;
 		center <= 1;
 		#10;
 		center <= 0;
 		#990;
+		
 		
 		
 		

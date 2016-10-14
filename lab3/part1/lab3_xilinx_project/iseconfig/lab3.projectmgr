@@ -19,13 +19,13 @@
          <ClosedNode>/tm_fsm_control C:|Users|joncr_000|tm-verilog|lab3|tm_fsm_control.v/TAPE2 - tape</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>main (Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/main.v)</SelectedItem>
+         <SelectedItem>FSM - fsm (Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/fsm.v)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001eb000000020000000000000000000000000200000064ffffffff000000810000000300000002000001eb0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>main (Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/main.v)</CurrentItem>
+      <CurrentItem>FSM - fsm (Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/fsm.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VERILOG" guiview="Process" >
       <ClosedNodes>
@@ -41,7 +41,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f8000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f80000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000ee000000010000000100000000000000000000000064ffffffff000000810000000000000001000000ee0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem></CurrentItem>
    </ItemView>
@@ -85,6 +85,9 @@
    <ItemView engineview="BehavioralSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
+         <ClosedNode>/fsm Z:|shared_with_vm_cs141|lab3|part1|lab3_xilinx_project|fsm.v/tape0 - tape</ClosedNode>
+         <ClosedNode>/fsm Z:|shared_with_vm_cs141|lab3|part1|lab3_xilinx_project|fsm.v/tape1 - tape</ClosedNode>
+         <ClosedNode>/fsm Z:|shared_with_vm_cs141|lab3|part1|lab3_xilinx_project|fsm.v/tape2 - tape</ClosedNode>
          <ClosedNode>/main C:|Users|joncr_000|tm-verilog|lab3|main.v/FSM0 - tm_fsm_control/TAPE0 - tape</ClosedNode>
          <ClosedNode>/main C:|Users|joncr_000|tm-verilog|lab3|main.v/FSM0 - tm_fsm_control/TAPE1 - tape</ClosedNode>
          <ClosedNode>/main C:|Users|joncr_000|tm-verilog|lab3|main.v/FSM0 - tm_fsm_control/TAPE2 - tape</ClosedNode>
@@ -95,13 +98,13 @@
          <ClosedNode>/tm_fsm_tb C:|Users|joncr_000|tm-verilog|lab3|tm_fsm_tb.v</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>tape_test (Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/tape_test.v)</SelectedItem>
+         <SelectedItem>test_fsm (Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/test_fsm.v)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >1</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >42</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001eb000000020000000000000000000000000200000064ffffffff000000810000000300000002000001eb0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>tape_test (Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/tape_test.v)</CurrentItem>
+      <CurrentItem>test_fsm (Z:/shared_with_vm_cs141/lab3/part1/lab3_xilinx_project/test_fsm.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -113,7 +116,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f8000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f80000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000290000000010000000100000000000000000000000064ffffffff000000810000000000000001000002900000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem></CurrentItem>
    </ItemView>
@@ -126,7 +129,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000f8000000010000000100000000000000000000000064ffffffff000000810000000000000001000000f80000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000ee000000010000000100000000000000000000000064ffffffff000000810000000000000001000000ee0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Simulate Behavioral Model</CurrentItem>
    </ItemView>
