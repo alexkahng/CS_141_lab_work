@@ -1,0 +1,7 @@
+verilog work "ipcore_dir/clock_generator.v"
+verilog work "register.v"
+verilog work "tape.v"
+verilog work "led_switch_driver.v"
+verilog work "fsm.v"
+verilog work "debouncer.v"
+verilog work "main.v"
