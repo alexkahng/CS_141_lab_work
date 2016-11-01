@@ -30,10 +30,11 @@ assign led = switch; // feel free to use this or any of the other IO devices for
 clock_generator CLOCK_GEN (.clk100M_raw(unbuf_clk), .clk100M(cclk));
 
 //memory
-wire [N-1:0] mem_addr0, mem_rd_addr0, mem_wr_data0, mem_wr_addr1, mem_rd_addr1, mem_wr_data1, mem_addr0, mem_addr1;
+wire [N-1:0] mem_wr_addr0, mem_rd_addr0, mem_wr_data0, mem_wr_addr1, mem_rd_addr1, mem_wr_data1, mem_addr0, mem_addr1;
 wire [N-1:0] mem_rd_data0, mem_rd_data1;
 wire mem_wr_ena0, mem_wr_ena1;
 
+assign mem_addr0 = mem_wr_ena0 ? mem_wr_addd0 : mem_rd_addr0;
 assign mem_addr1 = mem_wr_ena1 ? mem_wr_addr1 : mem_rd_addr1;
 synth_dual_port_memory #(.N(32), .I_LENGTH(256), .D_LENGTH(513), .I_WIDTH(8), .D_WIDTH(10)) MEMORY (
 	.clk(cclk),
@@ -49,6 +50,8 @@ synth_dual_port_memory #(.N(32), .I_LENGTH(256), .D_LENGTH(513), .I_WIDTH(8), .D
 );
 
 // you'll want to make a module for your mips core and interface with the memory module here
+
+mips_module #(.N(32)) cpu (.clk(cclk), .rstb(rstb), .read_data(mem_rd_data0), .mem_wr_addr(mem_wr_addr0), .mem_rd_addr(mem_rd_addr0), .mem_wr_ena(mem_wr_ena0));
 
 endmodule
 

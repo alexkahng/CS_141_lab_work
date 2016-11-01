@@ -11,7 +11,7 @@ integer i;
 reg [8*100:0] WAVE_FILE;
 
 //declare any parameters for your mips core module
-
+parameter N = 32;
 
 //declare any additional IO for your mips core module
 reg  clk, rst;

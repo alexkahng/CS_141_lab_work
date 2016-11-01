@@ -53,7 +53,7 @@
       <SelectedItems/>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000003a3000000040101000100000000000000000000000064ffffffff000000810000000000000004000000760000000100000000000000cc00000001000000000000005d0000000100000000000002040000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000004e3000000040101000100000000000000000000000064ffffffff000000810000000000000004000000760000000100000000000000cc00000001000000000000005d0000000100000000000003440000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>atlys.ucf</CurrentItem>
    </ItemView>
@@ -98,13 +98,13 @@
          <ClosedNode>/tm_fsm_tb C:|Users|joncr_000|tm-verilog|lab3|tm_fsm_tb.v</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>test_fsm (Z:/shared_with_vm_cs141/lab3/part2/lab3_xilinx_project/test_fsm.v)</SelectedItem>
+         <SelectedItem>uut - fsm (Z:/shared_with_vm_cs141/lab3/part2/lab3_xilinx_project/fsm.v)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >35</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001eb000000020000000000000000000000000200000064ffffffff000000810000000300000002000001eb0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>test_fsm (Z:/shared_with_vm_cs141/lab3/part2/lab3_xilinx_project/test_fsm.v)</CurrentItem>
+      <CurrentItem>uut - fsm (Z:/shared_with_vm_cs141/lab3/part2/lab3_xilinx_project/fsm.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
