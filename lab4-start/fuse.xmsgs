@@ -5,7 +5,7 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"Z:/shared_with_vm_cs141/lab4-start/test_mips_multicycle.v" Line 31: Port <arg fmt="%s" index="1">error</arg> is not connected to this instance
+<msg type="warning" file="HDLCompiler" num="1016" delta="unknown" >"Z:/CS_141_lab_work/lab4-start/test_mips_multicycle.v" Line 31: Port <arg fmt="%s" index="1">error</arg> is not connected to this instance
 </msg>
 
 </messages>

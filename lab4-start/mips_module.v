@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 `default_nettype none //helps catch typo-related bugs
 `include "mips_memory_space_defines.v"
+`include "alu_defines.v"
 //////////////////////////////////////////////////////////////////////////////////
 // 
 // CS 141 - Fall 2015
@@ -37,7 +38,7 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 	// Register file data
 	wire [4:0] reg_rd_addr0, reg_rd_addr1, reg_wr_addr;
 	wire [31:0] reg_rd_data0, reg_rd_data1;
-	reg [31:0] reg_wr_data;
+	wire [31:0] reg_wr_data;
 	
 	// FSM state
 	reg [3:0] state;
@@ -47,6 +48,7 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 	assign reg_rd_addr0 = rs;
 	assign reg_rd_addr1 = rt;
 	assign reg_wr_addr = rd;
+	assign reg_wr_data = regW;
 	
 	//instantiate ALU
 	mux2to1 #(.N(N)) srcAmux (.select(aluSrcA), .inA(pc), .inB(regD1), .out(srcA));
@@ -79,9 +81,6 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 		if (ir_write) begin
 			ir <= read_data;
 		end
-		if (reg_write) begin
-			reg_wr_data <= regW;
-		end
 		
 		
 		// Alter state
@@ -96,12 +95,21 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 		end
 		else if (state == `DECODE) begin
 			state <= `EXECUTE;
-			regD1 <= reg_rd_data0;
-			regD2 <= reg_rd_data1;
+			if (funct == `MIPS_SLL | funct == `MIPS_SRL | funct == `MIPS_SRA) begin
+				regD1 <= reg_rd_data1;
+				regD2 <= shamt;
+			end
+			else begin
+				regD1 <= reg_rd_data0;
+				regD2 <= reg_rd_data1;
+			end
 		end
 		else if (state == `EXECUTE) begin
 			state <= `ALU_WRITEBACK;
 			regW <= aluOut;
+		end
+		else if (state == `ALU_WRITEBACK) begin
+			state <= `FETCH;
 		end
 	end
 

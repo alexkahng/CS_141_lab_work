@@ -54,7 +54,7 @@ initial begin
 		NUM_CYCLES = 1000;
 	end
 	
-	repeat (2) @(posedge clk); rst = 0;
+	repeat (2) @(posedge clk); rst = 1;
 	
 	repeat (NUM_CYCLES) @(negedge clk); //run the CPU
 	$display("simulated %d cycles", NUM_CYCLES);
