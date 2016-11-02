@@ -17,8 +17,7 @@ module control(state, opcode, funct, pc_write, ir_write, reg_write, aluSrcA, alu
 
 	//port definitions - customize for different bit widths
 	input wire [3:0] state;
-	input wire [5:0] opcode;
-	input wire [4:0] funct;
+	input wire [5:0] opcode, funct;
 	output wire pc_write, ir_write, reg_write, aluSrcA, mem_wr_ena;
 	output wire [1:0] aluSrcB;
 	output wire [3:0] aluControl;

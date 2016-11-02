@@ -35,7 +35,7 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 	wire [25:0] jump_addr;
 	
 	// Register file data
-	wire [5:0] reg_rd_addr0, reg_rd_addr1, reg_wr_addr;
+	wire [4:0] reg_rd_addr0, reg_rd_addr1, reg_wr_addr;
 	wire [31:0] reg_rd_data0, reg_rd_data1;
 	reg [31:0] reg_wr_data;
 	
