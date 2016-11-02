@@ -25,6 +25,9 @@ wire [N-1:0] mem_rd_data;
 wire mem_wr_ena;
 wire mem_invalid;
 
+wire [N-1:0] mem_wr_addr, mem_rd_addr;
+assign mem_addr = mem_wr_ena ? mem_wr_addr : mem_rd_addr;
+
 synth_dual_port_memory #(
 	.N(32),
 	.I_LENGTH(1024),
@@ -39,11 +42,12 @@ synth_dual_port_memory #(
 );
 
 //instantiate your mips core module here
+mips_module #(.N(N)) cpu (.clk(clk), .rstb(rstb), .read_data(mem_rd_data), .mem_wr_addr(mem_wr_addr), .mem_rd_addr(mem_rd_addr), .mem_wr_ena(mem_wr_ena));
 
 
 initial begin
-	clk = 0;
-	rst = 1;
+	clk = 1;
+	rst = 0;
 	
 	if(!$value$plusargs("NUM_CYCLES=%d", NUM_CYCLES)) begin
 		$display("defaulting to 1000 cycles");
