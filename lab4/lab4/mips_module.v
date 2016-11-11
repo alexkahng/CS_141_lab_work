@@ -11,7 +11,7 @@
 //
 //
 //////////////////////////////////////////////////////////////////////////////////
-module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
+module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 
 	//parameter definitions
 	parameter N = 32;
@@ -19,20 +19,21 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 	//port definitions - customize for different bit widths
 	input wire clk, rstb;
 	input wire [N-1:0] read_data;
-	output wire [N-1:0] mem_wr_addr, mem_rd_addr;
+	output wire [N-1:0] mem_wr_addr, mem_rd_addr, write_data;
 	output wire mem_wr_ena;
 	
-	reg [N-1:0] pc, ir, regD1, regD2, regW;
+	reg [N-1:0] pc, ir, regD1, regD2, regW, regLD;
 	wire [N-1:0] srcA, srcB, aluOut;
 	wire aluEqual, aluZero, aluOverflow;
 	wire [3:0] aluControl;
 	wire [1:0] aluSrcB;
-	wire pc_write, ir_write, reg_write, aluSrcA;
+	wire pc_write, ir_write, reg_write, aluSrcA, IorD, regDst, memToReg;
 	
 	// Decoded instruction
 	wire [5:0] opcode, funct;
 	wire [4:0] rs, rt, rd, shamt;
 	wire [15:0] imm;
+	wire [31:0] imm_ext;
 	wire [25:0] jump_addr;
 	
 	// Register file data
@@ -44,25 +45,30 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 	reg [3:0] state;
 	
 	// Assigning wires
-	assign mem_rd_addr = pc;
 	assign reg_rd_addr0 = rs;
 	assign reg_rd_addr1 = rt;
-	assign reg_wr_addr = rd;
-	assign reg_wr_data = regW;
+	assign write_data = regD2;
+	assign mem_wr_addr = regW;
 	
 	//instantiate ALU
 	mux2to1 #(.N(N)) srcAmux (.select(aluSrcA), .inA(pc), .inB(regD1), .out(srcA));
-	mux4to1 #(.N(N)) srcBmux (.select(aluSrcB), .inA(regD2), .inB(4), .inC(0), .inD(0), .out(srcB));
+	mux4to1 #(.N(N)) srcBmux (.select(aluSrcB), .inA(regD2), .inB(4), .inC(imm_ext), .inD(0), .out(srcB));
+	mux2to1 #(.N(N)) IorDmux (.select(IorD), .inA(pc), .inB(regW), .out(mem_rd_addr));
+	mux2to1 #(.N(N)) regDstmux (.select(regDst), .inA(rt), .inB(rd), .out(reg_wr_addr));
+	mux2to1 #(.N(N)) memToRegmux (.select(memToReg), .inA(regW), .inB(regLD), .out(reg_wr_data));
 	alu #(.N(N)) alu (.x(srcA), .y(srcB), .op_code(aluControl), .z(aluOut), .equal(aluEqual), .zero(aluZero), .overflow(aluOverflow));
 	
 	// instantiate control
-	control CONTROL (.state(state), .opcode(opcode), .funct(funct), .pc_write(pc_write), .ir_write(ir_write), .reg_write(reg_write), .aluSrcA(aluSrcA), .aluSrcB(aluSrcB), .aluControl(aluControl), .mem_wr_ena(mem_wr_ena));
+	control CONTROL (.state(state), .opcode(opcode), .funct(funct), .pc_write(pc_write), .ir_write(ir_write), .reg_write(reg_write), .aluSrcA(aluSrcA), .aluSrcB(aluSrcB), .aluControl(aluControl), .mem_wr_ena(mem_wr_ena), .IorD(IorD), .regDst(regDst), .memToReg(memToReg));
 	
 	// instruction decoder
 	instruction_decoder DECODE (.instruction(ir), .opcode(opcode), .rs(rs), .rt(rt), .rd(rd), .shamt(shamt), .funct(funct), .imm(imm), .jump_addr(jump_addr));
 	
 	// register file
 	register_file regs (.clk(clk), .rst(rstb), .rd_addr0(reg_rd_addr0), .rd_addr1(reg_rd_addr1), .wr_addr(reg_wr_addr), .rd_data0(reg_rd_data0), .rd_data1(reg_rd_data1), .wr_data(reg_wr_data), .wr_ena(reg_write));
+	
+	// sign extend
+	sign_extend ext (.in(imm), .out(imm_ext));
 	
 	//module body
 	initial begin
@@ -72,6 +78,7 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 		regD1 <= 0;
 		regD2 <= 0;
 		regW <= 0;
+		regLD <= 0;
 	end
 	
 	always @(posedge clk) begin
@@ -94,7 +101,16 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 			state <= `DECODE;
 		end
 		else if (state == `DECODE) begin
-			state <= `EXECUTE;
+			if (opcode == `OPRTYPE) begin
+				state <= `EXECUTE;
+			end
+			else if (opcode == `OPADDI | opcode == `OPANDI | opcode == `OPORI | opcode == `OPXORI | opcode == `OPSLTI) begin
+				state <= `EXECUTE_IMM;
+			end
+			else if (opcode == `OPSW | opcode == `OPLW) begin
+				state <= `MEMADDR;
+			end
+			
 			if (funct == `MIPS_SLL | funct == `MIPS_SRL | funct == `MIPS_SRA) begin
 				regD1 <= reg_rd_data1;
 				regD2 <= shamt;
@@ -108,7 +124,34 @@ module mips_module(clk, rstb, read_data, mem_wr_addr, mem_rd_addr, mem_wr_ena);
 			state <= `ALU_WRITEBACK;
 			regW <= aluOut;
 		end
+		else if (state == `EXECUTE_IMM) begin
+			state <= `ALU_WRITEBACK;
+			regW <= aluOut;
+		end
 		else if (state == `ALU_WRITEBACK) begin
+			state <= `FETCH;
+		end
+		else if (state == `MEMADDR) begin
+			if (opcode == `OPLW) begin
+				state <= `MEMREAD;
+			end
+			else if (opcode == `OPSW) begin
+				state <= `MEMWRITE;
+			end
+			
+			regW <= aluOut;
+		end
+		else if (state == `MEMREAD) begin
+			state <= `MEMREAD_WAIT;
+		end
+		else if (state == `MEMREAD_WAIT) begin
+			state <= `MEM_WRITEBACK;
+			regLD <= read_data;
+		end
+		else if (state == `MEM_WRITEBACK) begin
+			state <= `FETCH;
+		end
+		else if (state == `MEMWRITE) begin
 			state <= `FETCH;
 		end
 	end

@@ -51,7 +51,7 @@ synth_dual_port_memory #(.N(32), .I_LENGTH(256), .D_LENGTH(513), .I_WIDTH(8), .D
 
 // you'll want to make a module for your mips core and interface with the memory module here
 
-mips_module #(.N(32)) cpu (.clk(cclk), .rstb(rstb), .read_data(mem_rd_data0), .mem_wr_addr(mem_wr_addr0), .mem_rd_addr(mem_rd_addr0), .mem_wr_ena(mem_wr_ena0));
+mips_module #(.N(32)) cpu (.clk(cclk), .rstb(rstb), .read_data(mem_rd_data0), .write_data(mem_wr_data0), .mem_wr_addr(mem_wr_addr0), .mem_rd_addr(mem_rd_addr0), .mem_wr_ena(mem_wr_ena0));
 
 endmodule
 

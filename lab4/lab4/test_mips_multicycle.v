@@ -42,7 +42,7 @@ synth_dual_port_memory #(
 );
 
 //instantiate your mips core module here
-mips_module #(.N(N)) cpu (.clk(clk), .rstb(rstb), .read_data(mem_rd_data), .mem_wr_addr(mem_wr_addr), .mem_rd_addr(mem_rd_addr), .mem_wr_ena(mem_wr_ena));
+mips_module #(.N(N)) cpu (.clk(clk), .rstb(rstb), .read_data(mem_rd_data), .write_data(mem_wr_data), .mem_wr_addr(mem_wr_addr), .mem_rd_addr(mem_rd_addr), .mem_wr_ena(mem_wr_ena));
 
 
 initial begin
