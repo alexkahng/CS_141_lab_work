@@ -11,13 +11,13 @@
          <ClosedNode>/test_register_file C:|Users|joncr_000|Downloads|lab4-start|lab4-start|remote_sources|_|test_register_file.v</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>main (Z:/shared_with_vm_cs141/lab4-start/main.v)</SelectedItem>
+         <SelectedItem>main (Z:/shared_with_vm_cs141/lab4/lab4/main.v)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000261000000020000000000000000000000000200000064ffffffff000000810000000300000002000002610000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>main (Z:/shared_with_vm_cs141/lab4-start/main.v)</CurrentItem>
+      <CurrentItem>main (Z:/shared_with_vm_cs141/lab4/lab4/main.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VERILOG" guiview="Process" >
       <ClosedNodes>
@@ -44,7 +44,7 @@
       <SelectedItems/>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000004e3000000040101000100000000000000000000000064ffffffff000000810000000000000004000000a50000000100000000000000cc00000001000000000000005d0000000100000000000003150000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000004c9000000040101000100000000000000000000000064ffffffff000000810000000000000004000000a50000000100000000000000cc00000001000000000000005d0000000100000000000002fb0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>alu.v</CurrentItem>
    </ItemView>
@@ -107,33 +107,21 @@
    <ItemView engineview="BehavioralSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
+         <ClosedNode>/test_mips_module Z:|shared_with_vm_cs141|lab4|lab4|test_mips_module.v</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>alu - alu (Z:/shared_with_vm_cs141/lab4-start/remote_sources/_/alu.v)</SelectedItem>
+         <SelectedItem>CONTROL - control (Z:/shared_with_vm_cs141/lab4/lab4/control.v)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >4</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >63</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000261000000020000000000000000000000000200000064ffffffff000000810000000300000002000002610000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>alu - alu (Z:/shared_with_vm_cs141/lab4-start/remote_sources/_/alu.v)</CurrentItem>
+      <CurrentItem>CONTROL - control (Z:/shared_with_vm_cs141/lab4/lab4/control.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
          <ClosedNode>Design Utilities</ClosedNode>
-      </ClosedNodes>
-      <SelectedItems>
-         <SelectedItem/>
-      </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
-      <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000ee000000010000000100000000000000000000000064ffffffff000000810000000000000001000000ee0000000100000000</ViewHeaderState>
-      <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem/>
-   </ItemView>
-   <ItemView engineview="BehavioralSim" sourcetype="DESUT_VERILOG" guiview="Process" >
-      <ClosedNodes>
-         <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
          <SelectedItem></SelectedItem>
@@ -143,5 +131,18 @@
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000ee000000010000000100000000000000000000000064ffffffff000000810000000000000001000000ee0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem></CurrentItem>
+   </ItemView>
+   <ItemView engineview="BehavioralSim" sourcetype="DESUT_VERILOG" guiview="Process" >
+      <ClosedNodes>
+         <ClosedNodesVersion>1</ClosedNodesVersion>
+      </ClosedNodes>
+      <SelectedItems>
+         <SelectedItem>Simulate Behavioral Model</SelectedItem>
+      </SelectedItems>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000000ee000000010000000100000000000000000000000064ffffffff000000810000000000000001000000ee0000000100000000</ViewHeaderState>
+      <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
+      <CurrentItem>Simulate Behavioral Model</CurrentItem>
    </ItemView>
 </Project>
