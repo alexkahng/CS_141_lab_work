@@ -16,21 +16,21 @@ module aluCtrl(aluOp, funct, opcode, aluControl);
 	//parameter definitions
 
 	//port definitions - customize for different bit widths
-	input wire [1:0] aluOp;
+	input wire [2:0] aluOp;
 	input wire [5:0] funct, opcode;
 	output wire [3:0] aluControl;
 	
-	assign aluControl = (aluOp == 2'b00) ? `ALU_OP_ADD : (aluOp == 2'b01) ? `ALU_OP_SUB :
-								(funct == `MIPS_AND | opcode == `OPANDI) 	? `ALU_OP_AND : 
-								(funct == `MIPS_OR  | opcode == `OPORI) 	? `ALU_OP_OR : 
-								(funct == `MIPS_XOR | opcode == `OPXORI) 	? `ALU_OP_XOR : 
-								(funct == `MIPS_NOR) ? `ALU_OP_NOR : 
-								(funct == `MIPS_SLT | opcode == `OPSLTI) 	? `ALU_OP_SLT : 
-								(funct == `MIPS_SLL) ? `ALU_OP_SLL : 
-								(funct == `MIPS_SRL) ? `ALU_OP_SRL : 
-								(funct == `MIPS_ADD | opcode == `OPADDI) 	? `ALU_OP_ADD : 
-								(funct == `MIPS_SUB) ? `ALU_OP_SUB : 
-								(funct == `MIPS_SRA) ? `ALU_OP_SRA : -1;
+	assign aluControl = (aluOp == 3'b000) ? `ALU_OP_ADD : (aluOp == 3'b001) ? `ALU_OP_SUB :
+								((aluOp == 3'b010 & funct == `MIPS_AND) | (aluOp == 3'b011 & opcode == `OPANDI)) 	? `ALU_OP_AND : 
+								((aluOp == 3'b010 & funct == `MIPS_OR)  | (aluOp == 3'b011 & opcode == `OPORI))	 	? `ALU_OP_OR : 
+								((aluOp == 3'b010 & funct == `MIPS_XOR) | (aluOp == 3'b011 & opcode == `OPXORI)) 	? `ALU_OP_XOR : 
+								(aluOp == 3'b010 & funct == `MIPS_NOR) ? `ALU_OP_NOR : 
+								((aluOp == 3'b010 & funct == `MIPS_SLT) | (aluOp == 3'b011 & opcode == `OPSLTI)) 	? `ALU_OP_SLT : 
+								(aluOp == 3'b010 & funct == `MIPS_SLL) ? `ALU_OP_SLL : 
+								(aluOp == 3'b010 & funct == `MIPS_SRL) ? `ALU_OP_SRL : 
+								((aluOp == 3'b010 & funct == `MIPS_ADD) | (aluOp == 3'b011 & opcode == `OPADDI)) 	? `ALU_OP_ADD : 
+								(aluOp == 3'b010 & funct == `MIPS_SUB) ? `ALU_OP_SUB : 
+								(aluOp == 3'b010 & funct == `MIPS_SRA) ? `ALU_OP_SRA : -1;
 
 endmodule
 `default_nettype wire //some Xilinx IP requires that the default_nettype be set to wire

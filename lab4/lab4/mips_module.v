@@ -22,12 +22,15 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 	output wire [N-1:0] mem_wr_addr, mem_rd_addr, write_data;
 	output wire mem_wr_ena;
 	
+	// Flip-flops
 	reg [N-1:0] pc, ir, regD1, regD2, regW, regLD;
-	wire [N-1:0] srcA, srcB, aluOut;
+	
+	// Needed wires
+	wire [N-1:0] srcA, srcB, aluOut, pcNext, jAddr;
 	wire aluEqual, aluZero, aluOverflow;
 	wire [3:0] aluControl;
-	wire [1:0] aluSrcB;
-	wire pc_write, ir_write, reg_write, aluSrcA, IorD, regDst, memToReg;
+	wire [1:0] aluSrcB, pcSrc, regDst, memToReg;
+	wire pc_write, ir_write, reg_write, aluSrcA, IorD, pc_en, branch, branchNE;
 	
 	// Decoded instruction
 	wire [5:0] opcode, funct;
@@ -35,6 +38,7 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 	wire [15:0] imm;
 	wire [31:0] imm_ext;
 	wire [25:0] jump_addr;
+	wire [31:0] branch_addr;
 	
 	// Register file data
 	wire [4:0] reg_rd_addr0, reg_rd_addr1, reg_wr_addr;
@@ -42,26 +46,30 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 	wire [31:0] reg_wr_data;
 	
 	// FSM state
-	reg [3:0] state;
+	reg [4:0] state;
 	
 	// Assigning wires
 	assign reg_rd_addr0 = rs;
 	assign reg_rd_addr1 = rt;
 	assign write_data = regD2;
 	assign mem_wr_addr = regW;
+	assign pc_en = pc_write | (branch & aluZero) | (branchNE & ~aluZero);
 	
-	//instantiate ALU
+	// Instantiate muxes
 	mux2to1 #(.N(N)) srcAmux (.select(aluSrcA), .inA(pc), .inB(regD1), .out(srcA));
-	mux4to1 #(.N(N)) srcBmux (.select(aluSrcB), .inA(regD2), .inB(4), .inC(imm_ext), .inD(0), .out(srcB));
+	mux4to1 #(.N(N)) srcBmux (.select(aluSrcB), .inA(regD2), .inB(4), .inC(imm_ext), .inD(branch_addr), .out(srcB));
 	mux2to1 #(.N(N)) IorDmux (.select(IorD), .inA(pc), .inB(regW), .out(mem_rd_addr));
-	mux2to1 #(.N(N)) regDstmux (.select(regDst), .inA(rt), .inB(rd), .out(reg_wr_addr));
-	mux2to1 #(.N(N)) memToRegmux (.select(memToReg), .inA(regW), .inB(regLD), .out(reg_wr_data));
+	mux4to1 #(.N(N)) regDstmux (.select(regDst), .inA(rt), .inB(rd), .inC(31), .inD(0), .out(reg_wr_addr));
+	mux4to1 #(.N(N)) memToRegmux (.select(memToReg), .inA(regW), .inB(regLD), .inC(pc), .inD(0), .out(reg_wr_data));
+	mux4to1 #(.N(N)) pcmux (.select(pcSrc), .inA(aluOut), .inB(regW), .inC(jAddr), .inD(regD1), .out(pcNext));
+	
+	// Instantiate ALU
 	alu #(.N(N)) alu (.x(srcA), .y(srcB), .op_code(aluControl), .z(aluOut), .equal(aluEqual), .zero(aluZero), .overflow(aluOverflow));
 	
-	// instantiate control
-	control CONTROL (.state(state), .opcode(opcode), .funct(funct), .pc_write(pc_write), .ir_write(ir_write), .reg_write(reg_write), .aluSrcA(aluSrcA), .aluSrcB(aluSrcB), .aluControl(aluControl), .mem_wr_ena(mem_wr_ena), .IorD(IorD), .regDst(regDst), .memToReg(memToReg));
+	// Instantiate control
+	control CONTROL (.state(state), .opcode(opcode), .funct(funct), .pc_write(pc_write), .ir_write(ir_write), .reg_write(reg_write), .aluSrcA(aluSrcA), .aluSrcB(aluSrcB), .aluControl(aluControl), .mem_wr_ena(mem_wr_ena), .IorD(IorD), .regDst(regDst), .memToReg(memToReg), .pcSrc(pcSrc), .branch(branch), .branchNE(branchNE));
 	
-	// instruction decoder
+	// Instruction decoder
 	instruction_decoder DECODE (.instruction(ir), .opcode(opcode), .rs(rs), .rt(rt), .rd(rd), .shamt(shamt), .funct(funct), .imm(imm), .jump_addr(jump_addr));
 	
 	// register file
@@ -69,6 +77,12 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 	
 	// sign extend
 	sign_extend ext (.in(imm), .out(imm_ext));
+	
+	// Jump address
+	jumpAddr jumpAddr (.addr(jump_addr), .instr(pc[N-1:N-4]), .out(jAddr));
+	
+	// Branch address
+	shiftLeftTwo branchAddr (.in(imm_ext), .out(branch_addr));
 	
 	//module body
 	initial begin
@@ -82,8 +96,8 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 	end
 	
 	always @(posedge clk) begin
-		if (pc_write) begin
-			pc <= aluOut;
+		if (pc_en) begin
+			pc <= pcNext;
 		end
 		if (ir_write) begin
 			ir <= read_data;
@@ -101,7 +115,10 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 			state <= `DECODE;
 		end
 		else if (state == `DECODE) begin
-			if (opcode == `OPRTYPE) begin
+			if (opcode == `OPRTYPE & funct == `MIPS_JR) begin
+				state <= `JR;
+			end
+			else if (opcode == `OPRTYPE) begin     // All R type except JR
 				state <= `EXECUTE;
 			end
 			else if (opcode == `OPADDI | opcode == `OPANDI | opcode == `OPORI | opcode == `OPXORI | opcode == `OPSLTI) begin
@@ -110,8 +127,20 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 			else if (opcode == `OPSW | opcode == `OPLW) begin
 				state <= `MEMADDR;
 			end
+			else if (opcode == `OPJUMP) begin
+				state <= `JUMP;
+			end
+			else if (opcode == `OPJAL) begin
+				state <= `JAL;
+			end
+			else if (opcode == `OPBEQ) begin
+				state <= `BEQ;
+			end
+			else if (opcode == `OPBNE) begin
+				state <= `BNE;
+			end
 			
-			if (funct == `MIPS_SLL | funct == `MIPS_SRL | funct == `MIPS_SRA) begin
+			if (opcode == `OPRTYPE & (funct == `MIPS_SLL | funct == `MIPS_SRL | funct == `MIPS_SRA)) begin
 				regD1 <= reg_rd_data1;
 				regD2 <= shamt;
 			end
@@ -119,6 +148,9 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 				regD1 <= reg_rd_data0;
 				regD2 <= reg_rd_data1;
 			end
+			
+			// Branch address calculation
+			regW <= aluOut;
 		end
 		else if (state == `EXECUTE) begin
 			state <= `ALU_WRITEBACK;
@@ -152,6 +184,21 @@ module mips_module(clk, rstb, read_data, write_data, mem_wr_addr, mem_rd_addr, m
 			state <= `FETCH;
 		end
 		else if (state == `MEMWRITE) begin
+			state <= `FETCH;
+		end
+		else if (state == `JUMP) begin
+			state <= `FETCH;
+		end
+		else if (state == `JR) begin
+			state <= `FETCH;
+		end
+		else if (state == `JAL) begin
+			state <= `FETCH;
+		end
+		else if (state == `BEQ) begin
+			state <= `FETCH;
+		end
+		else if (state == `BNE) begin
 			state <= `FETCH;
 		end
 	end

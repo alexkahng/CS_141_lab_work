@@ -22,5 +22,6 @@
 `define MIPS_ADD 6'b100000
 `define MIPS_SUB 6'b100010
 `define MIPS_SRA 6'b000011
+`define MIPS_JR  6'b001000
 
 `endif
