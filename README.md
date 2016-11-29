@@ -1,6 +1,5 @@
 # CS141 Lab Work
-Labs for CS141, Harvard University, Fall 2016
-
+Labs for CS141, Harvard University, Fall 2016   
 Contributors: @alexkahng, @gzhang01
 
 ## Lab 1: Digital Circuit Design
